@@ -1,0 +1,119 @@
+.register-page .register-container {
+  min-height: 100vh;
+  background-image: url('../../src/images/Background-login-register.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Now these styles will only apply to elements inside .register-page */
+.register-page .register-form-container {
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  padding: 30px;
+  border-radius: 15px;
+  width: 450px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  max-width: 95%;
+}
+
+/* Form elements */
+.register-page .register-form-container h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #1f1d1d;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.register-page .register-form-container p {
+  font-size: 1.1em;
+  color: #2c2020;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* Styles for the two-input rows */
+.register-page .two-inputs-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.register-page .two-inputs-row div {
+  width: 48%;
+  margin-bottom: 0;
+}
+
+.register-page .register-form-container div {
+  margin-bottom: 15px;
+}
+
+.register-page .register-form-container label {
+  display: block;
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #2c2020;
+  font-size: 0.9em;
+}
+
+.register-page .register-form-container input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 0.9em;
+  color: #2c2020;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.register-page button {
+  padding: 0.8em 2em;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #000;
+  background-color: #daece6;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.register-page button:hover {
+  background-color: #613232;
+  box-shadow: 0px 15px 20px rgba(155, 57, 57, 0.4);
+  color: #f1eaea;
+  transform: translateY(-7px);
+}
+
+.register-page button:active {
+  transform: translateY(-1px);
+}
+
+.register-page .link {
+  text-decoration: none;
+  font-style: italic;
+  text-decoration: wavy;
+  color: #40dbdb;
+}
+
+.register-page .link:hover {
+  font-style: normal;
+  font-weight: bold;
+}

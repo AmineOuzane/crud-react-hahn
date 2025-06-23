@@ -1,24 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import { AuthProvider } from './Context/AuthContext';
+import Login from './component/Login';
+import Register from './component/Register';
+import Layout from './Layouts/Layout';
+import HomePage from './Pages/HomePage';
+import ListProduct from './component/ListProduct';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+
+          {/* root → redirect to /home */}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+
+          {/* pages without navbar */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          
+        {/* pages with navbar */}
+        <Route element={<Layout />}>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/products" element={<ListProduct />} />
+
+            
+        </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
