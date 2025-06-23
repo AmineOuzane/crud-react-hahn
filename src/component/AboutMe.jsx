@@ -1,117 +1,100 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FaLaptopCode, FaUserGraduate, FaGlobe, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Container, Row, Col, Card, Image } from 'react-bootstrap';
+import { useInView } from 'react-intersection-observer';
 
-const items = [
-  {
-    icon: <FaLaptopCode className="text-5xl text-indigo-600 mb-6" />,
-    title: 'Java Full-Stack Developer',
-    text: 'I build efficient, scalable web apps and APIs using Spring Boot, React, and Node.js.',
-  },
-  {
-    icon: <FaUserGraduate className="text-5xl text-indigo-600 mb-6 " />,
-    title: 'Continuous Learner',
-    text: 'Currently mastering AWS Cloud through ALX Morocco Program and hands-on projects.',
-  },
-  {
-    icon: <FaGlobe className="text-5xl text-indigo-600 mb-6" />,
-    title: 'Global Mindset',
-    text: 'Experienced in remote international teams with strong communication and cultural awareness.',
-  },
-];
+// Make sure the path to your CSS file is correct
+import '../style/AboutMe.css'; 
 
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.3 },
-  },
-};
+import SaaS from '../../src/images/saas 2.png';
 
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
-};
+/**
+ * A reusable component for our animated content blocks.
+ * REMOVED: The 'startVisible' prop is no longer needed.
+ */
+const ContentBlock = ({ imageSrc, title, text, imageSide = 'left' }) => {
+  const { ref, inView } = useInView({
+    // These options are perfect for our goal
+    threshold: 0.15, 
+    triggerOnce: true, 
+    // REMOVED: The 'skip' option is no longer needed.
+  });
 
-export default function AboutMe() {
+  const imageCol = (
+    <Col md={5} className="d-flex align-items-center justify-content-center">
+      <Image src={imageSrc} rounded fluid />
+    </Col>
+  );
+
+  const textCol = (
+    <Col md={7} className="d-flex flex-column justify-content-center">
+      <h2 className="mb-3">{title}</h2>
+      {text}
+    </Col>
+  );
+
   return (
-    <motion.div
-      className="py-16 px-6 max-w-4xl mx-auto"
-      variants={container}
-      initial="hidden"
-      animate="show"
-    >
-      {/* Intro Section */}
-      <div className="text-center max-w-3xl mx-auto mb-20">
-        <h1 className="text-5xl font-bold text-indigo-700 mb-4">Hi, I'm Amine 👋</h1>
-        <p className="text-gray-700 text-lg leading-relaxed">
-          Passionate about crafting elegant software — from clean APIs to beautiful user interfaces, focusing on complete and user-friendly solutions.
+    // SIMPLIFIED: The className now only depends on the 'inView' state for all blocks.
+    <div ref={ref} className={`content-block ${inView ? 'is-visible' : ''}`}>
+      <Card className="shadow-lg border-0 rounded-3 p-4">
+        <Card.Body>
+          <Row className="g-4">
+            {imageSide === 'left' ? [imageCol, textCol] : [textCol, imageCol]}
+          </Row>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+};
+
+
+// --- Main AboutMe Component ---
+export default function AboutMe() {
+  const blocks = [
+    {
+      imageSrc: "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp",
+      title: "Robust Fullstack Engineering",
+      text: (
+        <p className="lead">
+          I build scalable and secure server-side applications using <strong>Java</strong> and <strong>Spring Boot</strong> with a fluid frontend using <strong>React</strong>. 
+          My focus is on creating clean, efficient RESTful APIs, implementing complex business logic, and ensuring data integrity with databases like PostgreSQL and MySql, while currently developping my AWS Cloud Skills following a the Cloud Practionner and Solution Architect Certification on AWS.
         </p>
-        <div className="flex justify-center gap-8 mt-6 text-indigo-600 text-3xl">
-          <a
-            href="https://github.com/AmineOuzane"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="hover:text-indigo-800 transition"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://linkedin.com/in/amine-ouzane-955052271"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="hover:text-indigo-800 transition"
-          >
-            <FaLinkedin />
-          </a>
-        </div>
+      ),
+      imageSide: 'left',
+    },
+    {
+      imageSrc: SaaS,
+      title: "My recent project",
+      text: (
+        <p className="lead">
+          My recent project and yet the most challenging one was a <strong>Full-Stack SaaS</strong> application using <strong>WhatsApp</strong>,<strong>Spring Boot</strong> and <strong>React</strong>.
+          The purpose of the SaaS Application was to redirect all process to WhatsApp to have a optimized workflow that can be accessed from anywhere, anytime compared to standard ERP,CRM,Emails,...
+        </p>
+      ),
+      imageSide: 'right',
+    },
+  ];
+
+  return (
+    <Container className="my-5">
+      <div className="text-center mb-5">
+        <h1 className="display-3">Hello, I'm Amine Ouzane</h1>
+        <p className="lead text-muted">A Full-Stack Developer</p>
       </div>
 
-      {/* Info Cards */}
-      <h2 className="text-4xl font-bold text-center text-indigo-700 mb-12">
-        What I Do
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-4xl mx-auto">
-        {items.map(({ icon, title, text }, i) => (
-          <motion.div
-            key={i}
-            variants={item}
-            className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:shadow-2xl transition-shadow cursor-default max-w-sm mx-auto"
-          >
-            {icon}
-            <h3 className="text-2xl font-semibold mb-3 text-indigo-900">{title}</h3>
-            <p className="text-gray-600 text-base leading-relaxed">{text}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Tech Stack */}
-      <section className="mt-20 max-w-4xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-indigo-700 mb-10">
-          Tech Stack
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-10 text-center text-indigo-700">
-          {[
-            'React',
-            'Spring Boot',
-            'Node.js',
-            'MySQL',
-            'Docker',
-            'Git',
-            'TailwindCSS',
-            'Redis',
-          ].map((tech) => (
-            <motion.div
-              key={tech}
-              variants={item}
-              className="rounded-lg p-6 shadow-md bg-white cursor-default hover:shadow-xl transition"
-            >
-              <p className="text-2xl font-semibold">{tech}</p>
-            </motion.div>
+      <Row className="justify-content-center">
+        <Col md={11} lg={9}>
+          {blocks.map((block, index) => (
+            <ContentBlock
+              key={index}
+              imageSrc={block.imageSrc}
+              title={block.title}
+              text={block.text}
+              imageSide={block.imageSide}
+              // REMOVED: The 'startVisible' prop is no longer passed here.
+            />
           ))}
-        </div>
-      </section>
-    </motion.div>
+        </Col>
+      </Row>
+    </Container>
   );
 }

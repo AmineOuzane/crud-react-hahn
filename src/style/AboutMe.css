@@ -1,0 +1,20 @@
+
+.content-block {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.6s ease-out;
+  margin-bottom: 4rem; 
+}
+
+.content-block.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-block:last-child {
+  margin-bottom: 0;
+}
+
+.content-block-card {
+  /* No margin needed here anymore */
+}
